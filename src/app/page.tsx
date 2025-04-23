@@ -29,10 +29,6 @@ const LABELS: Array<Label> = [
 export default function Home() {
 	const [labeling, setLabeling] = React.useState<Array<TextLabel>>([])
 
-	const handleChange = (newLabels: Array<TextLabel>) => {
-		setLabeling(newLabels)
-	}
-
 	return (
 		<div className='min-h-screen bg-gray-100 p-4 md:p-8'>
 			<div className='mx-auto max-w-6xl flex flex-col md:flex-row gap-4'>
@@ -40,7 +36,7 @@ export default function Home() {
 					labels={LABELS}
 					text={TEXT}
 					labeling={labeling}
-					onChange={handleChange}
+					onChange={newLabeling => setLabeling(newLabeling)}
 				/>
 			</div>
 		</div>

@@ -48,11 +48,6 @@ export function TextLabeling({
 		const start = cloneRange.toString().length
 		const end = start + length
 
-		const newLabel: TextLabel = {
-			start,
-			end,
-			label: selectedLabel.label,
-		}
 		const isOverlapping = labeling.some(
 			label =>
 				(label.start < end && label.end > start) ||
@@ -62,6 +57,12 @@ export function TextLabeling({
 		if (isOverlapping) {
 			selection.removeAllRanges()
 			return
+		}
+
+		const newLabel: TextLabel = {
+			start,
+			end,
+			label: selectedLabel.label,
 		}
 
 		onChange([...labeling, newLabel])
