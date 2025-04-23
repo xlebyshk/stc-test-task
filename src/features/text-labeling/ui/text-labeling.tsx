@@ -26,7 +26,7 @@ export function TextLabeling({
 	const textRef = React.useRef<HTMLDivElement>(null)
 	const [selectedLabel, setSelectedLabel] = React.useState<Label | null>(null)
 
-	const mouseUpHandler = React.useCallback(() => {
+	const selectHandler = React.useCallback(() => {
 		if (!selectedLabel) return
 
 		const textBlock = textRef.current
@@ -107,7 +107,8 @@ export function TextLabeling({
 			<Card title='Документ' className='md:w-4/5'>
 				<div
 					ref={textRef}
-					onMouseUp={mouseUpHandler}
+					onMouseUp={selectHandler}
+					onTouchEnd={selectHandler}
 					className='overflow-auto whitespace-pre-wrap cursor-text text-black'
 				>
 					{segments.map((segment, idx) =>
