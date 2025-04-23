@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# STC test task document labeling
 
-## Getting Started
+## Demo Link
 
-First, run the development server:
+Задеплоил на свой сервер, подключение по http поэтому может потребоваться подтвердить подключение -> [click](http://77.105.167.206:3001/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## About Project
+
+### История такая
+
+В одной конторе наконец решили автоматизировать документооборот при помощи модного ИИ.
+Для обучения ИИ модели нужен инструмент по разметке входящих документов заранее заданными произвольными метками.
+Метки нужно соотнести с текстом документа, представляющего собой простой текстовый файл с переводами строк.
+
+### Задача
+
+Изготовить React-компонент по приложенным макетам и
+строго соответствующий типу:
+
+```
+type Label = {
+    color: string
+    label: string
+}
+
+type TextLabel = {
+    start: integer // начало фрагмента
+    end: integer // конец фрагмента
+    label: string // метка
+}
+
+type TextLabelingProps = {
+    labels: Label[]
+    text: string
+    labeling: TextLabel[]
+    onChange: (TextLabel[])=>void
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Сценарий взаимодействия:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Пользователь видит панель с документом и панель с метками
+2. Пользователь при помощи мыши выбирает нужную метку
+3. Пользователь отмечает соотвествующие выбранной метке фрагменты документа
+4. Пользователь повторяет шаги 2-3 до тех пор, пока не разметит весь длокумент
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Technologies
 
-## Learn More
+    - Next
+    - TypeScript
+    - Tailwind
 
-To learn more about Next.js, take a look at the following resources:
+## Setup
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Для запуска c помощью dev сервера
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. `npm install`
+2. `npm run dev`
+3. Откройте в браузере `http://localhost:3000` или другой url который отобразится в терминале
 
-## Deploy on Vercel
+### Для запуска с помощью docker
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. `docker build -t document-labeling .`
+2. `docker run -d --name document-labeling -p 3000:3000 document-labeling`
+3. Откройте в браузере `http://localhost:3000`
